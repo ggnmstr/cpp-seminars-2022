@@ -21,6 +21,9 @@ class vector {
 
   void set(int num, int idx);
   int at(int idx);
+  void resize(int new_capacity){
+    
+  }
 };
 
 int main(int argc, char **argv) {
