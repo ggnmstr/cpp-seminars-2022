@@ -23,11 +23,18 @@ class vector {
   int at(int idx);
   void push_back(int num){
     //case if data is full
-    //if (size = )
+    if (this->size == this->capacity){
+      resize(this->capacity*2);
+    }
     this->data[size++] = num;
   }
   void resize(int new_capacity){
-
+    int *data2 = new int[new_capacity]();
+    for (int i = 0; i < this->size; i++){
+      data2[i] = this->data[i];
+    }
+    delete[] this->data;
+    this->data = data2;
   }
 };
 
