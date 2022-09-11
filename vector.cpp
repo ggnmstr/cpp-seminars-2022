@@ -21,8 +21,13 @@ class vector {
 
   void set(int num, int idx);
   int at(int idx);
+  void push_back(int num){
+    //case if data is full
+    //if (size = )
+    this->data[size++] = num;
+  }
   void resize(int new_capacity){
-    
+
   }
 };
 
