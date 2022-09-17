@@ -25,7 +25,10 @@ class vector {
     }
     int size() { return size_;}
     void set(int num, int idx);
-    int at(int idx);
+    int at(int idx){
+      if (idx < 0 || idx >= size_) return 0;
+      return data_[idx];
+    };
 
   private:
     int *data_;
@@ -37,6 +40,7 @@ class vector {
       for (int i = 0; i < size_; i++){
         data2[i] = data_[i];
       }
+      capacity_ = new_capacity;
       delete[] data_;
       data_ = data2;
     }
@@ -44,5 +48,4 @@ class vector {
 
 int main(int argc, char **argv) {
   //vector v1;
-  //v1.push_back(5);
 }
