@@ -11,6 +11,22 @@ class vector {
       size_ = 0;
       data_ = new int[capacity]();
     }
+    vector(const vector &other){
+      capacity_ = other.capacity_;
+      size_ = other.size_;
+      data_ = new int[capacity_]();
+      for (int i = 0; i < size_; i++){
+        data_[i] = other.data_[i];
+      }
+    }
+    vector& operator=(const vector &other){
+      if (capacity_ < other.capacity_) resize(other.capacity_);
+      size_ = other.size_;
+      for (int i = 0; i < size_; i++){
+        data_[i] = other.data_[i];
+      }
+    }
+
     ~vector() { delete[] data_; }
 
     // adds element to the last avaialable position,
