@@ -25,6 +25,7 @@ class vector {
       for (int i = 0; i < size_; i++){
         data_[i] = other.data_[i];
       }
+      return *this;
     }
 
     ~vector() { delete[] data_; }
@@ -61,7 +62,5 @@ class vector {
       data_ = data2;
     }
 };
-
 int main(int argc, char **argv) {
-  //vector v1;
 }
