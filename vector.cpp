@@ -41,7 +41,10 @@ class vector {
       size_++;
     }
     int size() { return size_;}
-    void set(int num, int idx);
+    void set(int num, int idx){
+      if (idx < 0 || idx >= size_) return;
+      data_[idx] = num;
+    }
     int at(int idx){
       if (idx < 0 || idx >= size_) return 0;
       return data_[idx];
