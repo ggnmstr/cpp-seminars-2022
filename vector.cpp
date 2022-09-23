@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cassert>
+
 class vector {
   public:
     vector(int capacity = 8):
@@ -19,6 +20,11 @@ class vector {
       }
       return *this;
     }
+
+    int & operator[](int idx){
+      assert(idx >= 0 && idx < size_);
+      return data_[idx];
+    }
     /* operator= with swap
     vector & operator=(vector other) {
     // copy ctor, new data_ initialized
@@ -27,8 +33,8 @@ class vector {
     // data_ -> other, other.data_ -> this
     std::swap(data_, other.data_);
     // return *this;
-  }
-  */
+    }
+    */
 
 
     ~vector() { delete[] data_; }
@@ -71,5 +77,4 @@ class vector {
 
 
 int main(int argc, char **argv) {
-
 }
