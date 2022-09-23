@@ -1,24 +1,16 @@
+#include <iostream>
+#include <cassert>
 class vector {
   public:
-    //default constructor 
-    vector(){
-      capacity_ = 8;
-      size_ = 0;
-      data_ = new int[capacity_]();
+    vector(int capacity = 8):
+    capacity_(capacity), size_(0), data_(new int[capacity_]) {
     }
-    vector(int capacity) {
-      capacity_ = capacity;
-      size_ = 0;
-      data_ = new int[capacity]();
+
+    vector(const vector &other): capacity_(other.capacity_), size_(other.size_),
+    data_(new int[capacity_]) {
+      std::copy(other.data_, other.data_ + size_, data_);
     }
-    vector(const vector &other){
-      capacity_ = other.capacity_;
-      size_ = other.size_;
-      data_ = new int[capacity_]();
-      for (int i = 0; i < size_; i++){
-        data_[i] = other.data_[i];
-      }
-    }
+
     vector& operator=(const vector &other){
       if (capacity_ < other.capacity_) resize(other.capacity_);
       size_ = other.size_;
@@ -27,6 +19,17 @@ class vector {
       }
       return *this;
     }
+    /* operator= with swap
+    vector & operator=(vector other) {
+    // copy ctor, new data_ initialized
+    capacity_ = other.capacity_;
+    size_ = other.size_;
+    // data_ -> other, other.data_ -> this
+    std::swap(data_, other.data_);
+    // return *this;
+  }
+  */
+
 
     ~vector() { delete[] data_; }
 
@@ -65,5 +68,8 @@ class vector {
       data_ = data2;
     }
 };
+
+
 int main(int argc, char **argv) {
+
 }
