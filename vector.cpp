@@ -69,7 +69,40 @@ void vector::resize(int new_capacity){
     data_ = data2;
   }
 
+// iterator
 
+int & vector::iterator::operator*() {
+  return v[idx_];
+}
+
+// int a = ++it;
+vector::iterator & vector::iterator::operator++() {
+  idx_++;
+  return *this;
+}
+
+// int a = it++;
+vector::iterator vector::iterator::operator++(int) {
+  iterator tmp(*this);
+  idx_++;
+  return tmp;
+}
+
+bool vector::iterator::operator==(vector::iterator & other) const{
+  return (&this->v == &other.v && this->idx_ == other.idx_); 
+}
+
+bool vector::iterator::operator!=(vector::iterator & other) const{
+  return (&this->v != &other.v || this->idx_ != other.idx_); 
+}
+
+vector::iterator vector::begin(){
+
+}
+
+vector::iterator vector::end(){
+  
+}
 
 int main(int argc, char **argv) {
 }
