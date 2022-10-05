@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cassert>
 
-vector::vector(int capacity = 8):
+vector::vector(int capacity):
   capacity_(capacity), size_(0), data_(new int[capacity_]) {
   }
 
@@ -69,10 +69,19 @@ void vector::resize(int new_capacity){
     data_ = data2;
   }
 
+
+vector::iterator vector::begin(){
+  return vector::iterator(0,*this);
+}
+
+vector::iterator vector::end(){
+  return vector::iterator(size_,*this);
+}
+
 // iterator
 
 int & vector::iterator::operator*() {
-  return v[idx_];
+  return v_[idx_];
 }
 
 // int a = ++it;
@@ -88,20 +97,12 @@ vector::iterator vector::iterator::operator++(int) {
   return tmp;
 }
 
-bool vector::iterator::operator==(vector::iterator & other) const{
-  return (&this->v == &other.v && this->idx_ == other.idx_); 
+bool vector::iterator::operator==(const vector::iterator & other) const{
+  return (&this->v_ == &other.v_ && this->idx_ == other.idx_); 
 }
 
-bool vector::iterator::operator!=(vector::iterator & other) const{
-  return (&this->v != &other.v || this->idx_ != other.idx_); 
-}
-
-vector::iterator vector::begin(){
-
-}
-
-vector::iterator vector::end(){
-  
+bool vector::iterator::operator!=(const vector::iterator & other) const{
+  return !(*this == other); 
 }
 
 int main(int argc, char **argv) {

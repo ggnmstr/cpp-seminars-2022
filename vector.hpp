@@ -20,9 +20,10 @@ class vector {
 
     class iterator{
       public:
+        iterator(int idx, vector &v): idx_(idx),v_(v){};
         iterator(iterator &other) = default;
-        bool operator==(iterator &other) const;
-        bool operator!=(iterator &other) const;
+        bool operator==(const iterator &other) const;
+        bool operator!=(const iterator &other) const;
 
         int& operator*();
 
@@ -33,7 +34,7 @@ class vector {
       
       private:
         int idx_;
-        vector & v;
+        vector & v_;
   };
 
   iterator /*???*/ begin();
@@ -41,9 +42,10 @@ class vector {
   iterator /*???*/ end();
 
   private:
-    int *data_;
-    int size_;
     int capacity_;
+    int size_;
+    int *data_;
+    
     // resizes vector to given capacity
     void resize(int new_capacity);
 };
