@@ -3,7 +3,7 @@
 
 class vector {
   public:
-    vector(int capacity = 8);
+    vector(int capacity = DEFAULT_CAPACITY);
 
     ~vector();
 
@@ -42,6 +42,7 @@ class vector {
   iterator /*???*/ end();
 
   private:
+    static const int DEFAULT_CAPACITY = 8;
     int capacity_;
     int size_;
     int *data_;
