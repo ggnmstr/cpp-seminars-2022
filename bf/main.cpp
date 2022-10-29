@@ -1,31 +1,102 @@
 #include <iostream>
 
-void interpret(const std::string &cmds, uint8_t *ptr){
-    for (const char cmd : cmds){
-        switch (cmd)
-        {
-        case '>':
+class Command{
+    public:
+        virtual void apply(uint8_t *ptr) = 0;
+};
+
+class Right: public Command{
+    public:
+        void apply(uint8_t *ptr) override{
             ptr++;
-            break;
-        case '<':
+        }
+};
+
+class Left: public Command{
+    public:
+        void apply(uint8_t *ptr) override{
             ptr--;
-            break;
-        case '+':
+        }
+};
+
+class Plus: public Command{
+    public:
+        void apply(uint8_t *ptr) override{
             (*ptr)++;
-            break;
-        case '-':
+        }
+};
+
+class Minus: public Command{
+    public:
+        void apply(uint8_t *ptr) override{
             (*ptr)--;
-        case '.':
+        }
+};
+
+class Dot: public Command{
+    public:
+        void apply(uint8_t *ptr) override{
             std::cout << unsigned(*ptr) << std::endl;
-        case ',':
+        }
+};
+
+class Comma: public Command{
+    public:
+        void apply(uint8_t *ptr) override{
             int number;
             std::cin >> number;
             *ptr = number;
-            break;
-        default:
-            std::cerr << "unknown command: '" << cmd << "'" << std::endl;
-            break;
         }
+};
+
+class OpenBracket: public Command{
+    public:
+        void apply(uint8_t *ptr) override{
+            
+        }
+};
+
+class CloseBracket: public Command{
+    public:
+        void apply(uint8_t *ptr) override{
+
+        }
+};
+
+Command *get_cmd(const char c){
+    switch (c)
+        {
+        case '>':
+            return new Right();
+        case '<':
+            return new Left();
+        case '+':
+            return new Plus();
+        case '-':
+            return new Minus();
+        case '.':
+            return new Dot();
+        case ',':
+            return new Comma();
+        case '[':
+            return new OpenBracket();
+        case ']':
+            return new CloseBracket();
+        default:
+            return nullptr;
+        }
+}
+
+void interpret(const std::string &cmds, uint8_t *ptr){
+    for (const char c : cmds){
+        Command *cmd = get_cmd(c);
+        if (cmd == nullptr) {
+            std::cerr << "unknown command: '" << cmd << "'" << std::endl;
+            continue;
+        }
+        cmd->apply(ptr);
+        delete cmd;
+        
     }
 }
 
