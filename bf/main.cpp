@@ -82,16 +82,15 @@ Command *get_cmd(const char c){
             return new OpenBracket();
         case ']':
             return new CloseBracket();
-        default:
-            return nullptr;
         }
+    return nullptr;
 }
 
 void interpret(const std::string &cmds, uint8_t *ptr){
     for (const char c : cmds){
         Command *cmd = get_cmd(c);
         if (cmd == nullptr) {
-            std::cerr << "unknown command: '" << cmd << "'" << std::endl;
+            std::cerr << "unknown command: '" << c << "'" << std::endl;
             continue;
         }
         cmd->apply(ptr);
@@ -106,7 +105,8 @@ int main (int argc, char ** argv){
     uint8_t *ptr = data;
     while (true) {
         std::cin >> cmds;
-        interpret(cmds, data);
-    } 
+        interpret(cmds, ptr);
+        std::cout << (unsigned)data[0] << " " << (unsigned)data[1] << " " << (unsigned)data[2] << std::endl ;
+    }
     return 0;
 }
